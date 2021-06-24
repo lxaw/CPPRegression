@@ -12,6 +12,8 @@ class Matrix
 public:
 	// constructor / destructor
 	Matrix(int m, int n);
+	// copy constructor
+	Matrix(const Matrix& m1);
 	~Matrix();
 
 	void print();
@@ -19,8 +21,9 @@ public:
 	/*
 	Matrix methods.
 	*/
-	void setZeroes();
-
+	void setZeroes(); // resets the matrix to the zero matrix
+	void setIdentity(); // resets the matrix to the identity matrix
+	void setRandomInt(); // resets the matrix to random (0-9) values for testing
 	/*
 	Matrix operations. I tried out operator overloading here.
 	https://www.quantstart.com/articles/Matrix-Classes-in-C-The-Header-File/
@@ -28,6 +31,9 @@ public:
 
 	Note these functions RETURN matrices.
 	*/
+	
+	// copy assignment operator
+	Matrix<T>& operator = (const Matrix<T>& m);
 	
 	// add
 	Matrix<T> operator+(const Matrix<T>& aMatrix);
@@ -42,15 +48,15 @@ public:
 	NOTE: In Gilbert Strang's Book, matrix indexing is
 	done "row,col"
 	*/
-	T getAtIndex(const int& row, const int& col);
+	T getAtIndex(const int& row, const int& col) const;
 	void setAtIndex(const T& t, const int& row, const int& col);
 
 	// getters setters
 	
 	void setM(int m);
-	int getM();
+	int getM() const;
 	void setN(int n);
-	int getN();
+	int getN() const;
 
 	
 private:
@@ -67,8 +73,6 @@ private:
 	*/
 	// initialize matrix size, allocate the mem
 	void init();
-	// free memory
-	void freeMem();
 	
 };
 
