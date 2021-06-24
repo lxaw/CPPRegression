@@ -147,16 +147,6 @@ void Matrix<T>::setAtIndex(const T& t,const int& row, const int& col) {
 	_mat[row][col] = t;
 }
 
-/*
-Matrix assignment operators
-*/
-
-// copy assignment operator
-template <typename T>
-Matrix<T>& Matrix<T>::operator = (const Matrix<T>& aMatrix) {
-	cout << "assignment operator" << endl;
-	return *this;
-}
 
 
 
@@ -182,4 +172,40 @@ template <typename T>
 int Matrix<T>::getN() const{
 	return _n;
 }
+/*
+Matrix operators
+*/
 
+// copy assignment operator
+template <typename T>
+Matrix<T>& Matrix<T>::operator = (const Matrix<T>& aMatrix) {
+	/*
+	Look into copy swap
+	*/
+	cout << "assignment operator" << endl;
+	return *this;
+}
+
+template <typename T>
+Matrix<T> Matrix<T>::operator+(const Matrix<T>& aMatrix) {
+	Matrix<T> res(_m, _n);
+	for (int i = 0;i < _m;i++) {
+		for (int j = 0;j < _n;j++) {
+			T val = getAtIndex(i, j) + aMatrix.getAtIndex(i, j);
+			res.setAtIndex(val, i, j);
+		}
+	}
+	return res;
+}
+
+template <typename T>
+Matrix<T> Matrix<T>::operator-(const Matrix<T>& aMatrix){
+	Matrix<T> res(_m, _n);
+	for (int i = 0;i < _m;i++) {
+		for (int j = 0;j < _n;j++) {
+			T val = getAtIndex(i, j) - aMatrix.getAtIndex(i, j);
+			res.setAtIndex(val, i, j);
+		}
+	}
+	return res;
+}
