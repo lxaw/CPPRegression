@@ -12,6 +12,9 @@ int main(){
     Matrix<double> t = mat.transpose();
     cout << "T:" << endl;
     t.print();
+    Matrix<double> res = t - mat;
+    res.print();
+
     return 0;
 }
 
