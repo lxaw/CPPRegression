@@ -16,7 +16,7 @@ public:
 	Matrix(const Matrix& m1);
 	~Matrix();
 
-	void print();
+	void print() const;
 
 	/*
 	Matrix methods.
@@ -39,10 +39,12 @@ public:
 	Matrix<T> operator+(const Matrix<T>& aMatrix);
 	// sub
 	Matrix<T> operator-(const Matrix<T>& aMatrix);
-	// dot prod
+	// mult
 	Matrix<T> operator*(const Matrix<T>& aMatrix);
 	// transpose
 	Matrix<T> transpose();
+	// get inverse of matrix
+	Matrix<T> inverse();
 
 	/*
 	NOTE: In Gilbert Strang's Book, matrix indexing is

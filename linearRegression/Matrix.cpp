@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include <assert.h>
 // user classes
 #include "Matrix.h"
 
@@ -9,7 +10,6 @@ using namespace::std;
 // Constructor
 template <typename T>
 Matrix<T>::Matrix(int m, int n) {
-	_mat = NULL;
 	_m = m;
 	_n = n;
 	
@@ -20,9 +20,9 @@ Matrix<T>::Matrix(int m, int n) {
 // copy constructor
 template <typename T>
 Matrix<T>::Matrix(const Matrix& m1){
+	cout << "call copy-const" << endl;
 	_m = m1.getM();
 	_n = m1.getN();
-
 	// initiate, set zeros
 	init();
 	for (int i = 0;i < _m;i++) {
@@ -34,16 +34,17 @@ Matrix<T>::Matrix(const Matrix& m1){
 // destructor
 template <typename T>
 Matrix<T>::~Matrix() {
+	cout << "DESTRUCTOR" << endl;
 	if (NULL == _mat) {
 		return;
 	}
-	for (int i = 0;i < _n;i++) {
+	for (int i = 0;i < _m;i++) {
 		delete[] _mat[i];
 	}
 	delete[] _mat;
 
-	_n = 0;
 	_m = 0;
+	_n = 0;
 	_mat = NULL;
 }
 
@@ -62,7 +63,7 @@ void Matrix<T>::init() {
 
 // print methods
 template <typename T>
-void Matrix<T>::print() {
+void Matrix<T>::print() const{
 	for (int i = 0;i < _m;i++) {
 		// create the inner bracket
 		cout << "[";
@@ -95,6 +96,19 @@ Matrix<T> Matrix<T>::transpose() {
 			res.setAtIndex(_mat[i][j], j, i);
 		}
 	}
+	return res;
+}
+
+template <typename T>
+Matrix<T> Matrix<T>::inverse() {
+	// need to be square to have inverse!
+	assert(_m == _n);
+	Matrix<T> res(_n, _m);
+	// perform guass jordan...
+
+
+
+
 	return res;
 }
 
@@ -209,3 +223,40 @@ Matrix<T> Matrix<T>::operator-(const Matrix<T>& aMatrix){
 	}
 	return res;
 }
+
+template <typename T>
+Matrix<T> Matrix<T>::operator*(const Matrix<T>& aMatrix) {
+	// (m x n) * (n x p) = (m x p)
+	// ie: (2x3)*(3x4) = (2x4)
+
+	// need n of m1 = m of n2
+	assert(_n == aMatrix.getM());
+
+	int p = aMatrix.getN();
+	Matrix<T> res(_m, p);
+
+	
+	for (int i = 0;i < _m;i++) {
+		// loop through horizontal on m1
+		for (int j = 0;j < p;j++) {
+			// loop through vertical on m2
+			T sum = 0;
+			for (int k = 0;k < _n;k++) {
+				//cout << i << " " << j << " " << k << "\n";
+				T val1 = _mat[i][k];
+				T val2 = aMatrix.getAtIndex(k,j);
+				T mult = val1 * val2;
+				sum += mult;
+
+			}
+			res.setAtIndex(sum, i, j);
+		}
+	}
+	
+	return res;
+}
+
+
+
+
+
