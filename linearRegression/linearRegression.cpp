@@ -5,14 +5,16 @@
 #include "Matrix.cpp"
 
 int main(){
-    Matrix<double> mat(4,4);
+    Matrix<double> mat(3,4);
     mat.setRandomInt();
     cout << "MAT:" << endl;
     mat.print();
-    Matrix<double> t = mat.transpose();
-    cout << "T:" << endl;
-    t.print();
-    Matrix<double> res = t - mat;
+    Matrix<double> mat2(4, 3);
+    mat2.setRandomInt();
+    cout << "MAT2" << endl;
+    mat2.print();
+
+    Matrix<double> res = mat * mat2;
     res.print();
 
     return 0;
