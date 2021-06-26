@@ -43,7 +43,7 @@ public:
 	Matrix<T> operator*(const Matrix<T>& aMatrix);
 	// transpose
 	Matrix<T> transpose();
-	// get inverse of matrix
+	// get inverse of matrix -- use GJ elim
 	Matrix<T> inverse();
 
 	/*

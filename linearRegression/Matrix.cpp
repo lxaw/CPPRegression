@@ -103,12 +103,48 @@ template <typename T>
 Matrix<T> Matrix<T>::inverse() {
 	// need to be square to have inverse!
 	assert(_m == _n);
-	Matrix<T> res(_n, _m);
+	// temp_mat is the temporary matrix for calcs
+	Matrix<T> temp_mat(_m,2*_n);
+	// res is the final result
+	Matrix<T> res(_m, _n);
 	// perform guass jordan...
-
-
-
-
+	for (int i = 0;i < _m;i++) {
+		for (int j = 0;j < temp_mat.getN();j++) {
+			if (j < _n) {
+				// fill the left side
+				temp_mat.setAtIndex(getAtIndex(i, j), i, j);
+			}
+			else if ((j-_n) == i){
+				// fill the right as the identity
+				temp_mat.setAtIndex(1, i, j);
+			}
+		}
+	}
+	// now we perform elim on both parts
+	for (int i = 0;i < _m;i++) {
+		for (int j = 0;j < _n;j++) {
+			if (j != i) {
+				T l = temp_mat.getAtIndex(j, i) / temp_mat.getAtIndex(i, i);
+				for (int k = 0; k < temp_mat.getN();k++) {
+					T temp = temp_mat.getAtIndex(j, k);
+					temp -= temp_mat.getAtIndex(i, k) * l;
+					temp_mat.setAtIndex(temp, j, k);
+				}
+			}
+		}
+	}
+	// now we divide out to get Identity on the left
+	for (int i = 0;i < _m;i++) {
+		T divisor = temp_mat.getAtIndex(i, i);
+		for (int j = 0;j < temp_mat.getN();j++) {
+			T temp = temp_mat.getAtIndex(i, j) / divisor;
+			temp_mat.setAtIndex(temp, i, j);
+			if (j >= _n) {
+				res.setAtIndex(temp, i, (j-_n));
+			}
+		}
+	}
+	res.print();
 	return res;
 }
 
@@ -189,6 +225,7 @@ int Matrix<T>::getN() const{
 /*
 Matrix operators
 */
+
 
 // copy assignment operator
 template <typename T>
