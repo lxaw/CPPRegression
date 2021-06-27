@@ -28,8 +28,8 @@ int main(){
 //
 //    Matrix<double> coef = (left.inverse()) * right;
 //    coef.print();
-    Backend be();
-       
+    Backend bg;
+
 
     return 0;
 }

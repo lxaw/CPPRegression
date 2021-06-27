@@ -142,10 +142,12 @@
     <ClCompile Include="Backend.cpp" />
     <ClCompile Include="linearRegression.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Point.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Backend.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Point.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
