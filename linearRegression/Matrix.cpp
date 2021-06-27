@@ -17,6 +17,32 @@ Matrix<T>::Matrix(int m, int n) {
 	init();
 	setZeroes();
 }
+// default constructor
+template <typename T>
+Matrix<T>::Matrix() {
+	_m = _n = 1;
+	init();
+	setZeroes();
+}
+template <typename T>
+void Matrix<T>::setEqual(const Matrix<T>& aMatrix) {
+	_m = aMatrix.getM();
+	_n = aMatrix.getN();
+	init();
+	copyValues(aMatrix);
+}
+
+template <typename T>
+void Matrix<T>::copyValues(const Matrix<T>& aMatrix) {
+	assert(_m == aMatrix.getM() && _n == aMatrix.getN());
+	for (int i = 0;i < _m;i++) {
+		for (int j = 0;j < _n;j++) {
+			T val = aMatrix.getAtIndex(i, j);
+			setAtIndex(val, i, j);
+		}
+	}
+}
+
 // copy constructor
 template <typename T>
 Matrix<T>::Matrix(const Matrix& m1){
@@ -234,6 +260,7 @@ Matrix<T>& Matrix<T>::operator = (const Matrix<T>& aMatrix) {
 	Look into copy swap
 	*/
 	cout << "assignment operator" << endl;
+
 	return *this;
 }
 
@@ -293,6 +320,38 @@ Matrix<T> Matrix<T>::operator*(const Matrix<T>& aMatrix) {
 	return res;
 }
 
+template <typename T>
+Matrix<T> Matrix<T>::join(const Matrix<T>& aMatrix) {
+	/*
+	This function joins two matrices
+	*/
+	// need to be same height
+	assert(_m == aMatrix.getM());
+
+	int new_cols = _n + aMatrix.getN();
+
+	Matrix<T> res(_m, new_cols);
+
+	// populate the matrix
+	for (int i = 0;i < _m;i++) {
+		for (int j = 0;j < new_cols;j++) {
+			int val;
+			if (j < _n) {
+				// populate first matrix side
+				val = getAtIndex(i, j);
+				res.setAtIndex(getAtIndex(i, j), i, j);
+			}
+			else {
+				// populate second matrix side
+				int adj_j = j - _n;
+				val = aMatrix.getAtIndex(i, adj_j);
+				res.setAtIndex(aMatrix.getAtIndex(i, adj_j), i, j);
+			}
+		}
+	}
+	
+	return res;
+}
 
 
 

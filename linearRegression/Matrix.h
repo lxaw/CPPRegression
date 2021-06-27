@@ -12,6 +12,8 @@ class Matrix
 public:
 	// constructor / destructor
 	Matrix(int m, int n);
+	// default constructor
+	Matrix();
 	// copy constructor
 	Matrix(const Matrix& m1);
 	~Matrix();
@@ -24,6 +26,9 @@ public:
 	void setZeroes(); // resets the matrix to the zero matrix
 	void setIdentity(); // resets the matrix to the identity matrix
 	void setRandomInt(); // resets the matrix to random (0-9) values for testing
+	void setEqual(const Matrix<T>& m);
+	void copyValues(const Matrix<T>& m);
+
 	/*
 	Matrix operations. I tried out operator overloading here.
 	https://www.quantstart.com/articles/Matrix-Classes-in-C-The-Header-File/
@@ -45,6 +50,8 @@ public:
 	Matrix<T> transpose();
 	// get inverse of matrix -- use GJ elim
 	Matrix<T> inverse();
+	// join two matrices
+	Matrix<T> join(const Matrix<T>& aMatrix);
 
 	/*
 	NOTE: In Gilbert Strang's Book, matrix indexing is

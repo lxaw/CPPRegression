@@ -1,5 +1,8 @@
 #include "Matrix.cpp"
+#include "Point.cpp"
 
+#include <vector>
+#include <iostream>
 using namespace::std;
 
 #pragma once
@@ -14,21 +17,15 @@ class Backend
 		void init();
 
 	private:
+
 		int _degReg = 0;
 		Matrix<double> _A;
 		Matrix<double> _b;
 		Matrix<double> _coefMat;
 
-		// prompts what type of regression (ie: linear, quadratic, etc);
-		void promptUserDegreeRegression();
+		vector<Point<double>> _pointVec;
 
-		// prompts user how many points of data they have to regress
-		void promptUserPointAmount();
-
-		// ask what point values found 
-		void promptPointValues();
-		
-		// calculates the coefficients of regression
-		void calculateCoefficients();
+		void promptUserDegReg();
+		void promptUserPoints();
 };
 
