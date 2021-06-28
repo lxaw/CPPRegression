@@ -1,4 +1,5 @@
 ﻿  Backend.cpp
+  Matrix.cpp
   linearRegression.cpp
   Generating Code...
   linearRegression.vcxproj -> D:\Desktop\linearRegression\Debug\linearRegression.exe

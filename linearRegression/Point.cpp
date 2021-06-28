@@ -9,6 +9,12 @@ Point<T>::Point(T x, T y) {
 	setX(x);
 	setY(y);
 }
+// def constructor
+template <typename T>
+Point<T>::Point() {
+	setX(0);
+	setY(0);
+}
 
 template <typename T>
 T Point<T>::getX(){
