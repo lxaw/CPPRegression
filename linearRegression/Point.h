@@ -8,6 +8,8 @@ class Point
 public:
 	// constructor
 	Point(T x, T y);
+	// def constructor
+	Point();
 
 	T getX();
 	T getY();

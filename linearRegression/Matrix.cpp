@@ -60,7 +60,7 @@ Matrix<T>::Matrix(const Matrix& m1){
 // destructor
 template <typename T>
 Matrix<T>::~Matrix() {
-	cout << "DESTRUCTOR" << endl;
+//	cout << "DESTRUCTOR" << endl;
 	if (NULL == _mat) {
 		return;
 	}

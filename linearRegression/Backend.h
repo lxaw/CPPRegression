@@ -19,6 +19,7 @@ class Backend
 	private:
 
 		int _degReg = 0;
+		vector<Matrix<double>> _matsVec;
 		Matrix<double> _A;
 		Matrix<double> _b;
 		Matrix<double> _coefMat;
@@ -27,5 +28,8 @@ class Backend
 
 		void promptUserDegReg();
 		void promptUserPoints();
+		void setMatrices();
+
+		void printPoints();
 };
 
